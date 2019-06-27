@@ -1,0 +1,20 @@
+<div class="container">
+    <mat-form-field>
+        <mat-label>Cargo</mat-label>
+        <mat-select [(value)]="registro.idCargo">
+            <mat-option *ngFor="let cargo of cargos" [value]="cargo.idCargo">
+                {{cargo.cargo}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <input [(ngModel)]="registro.nombre" matInput placeholder="Nombre">
+    </mat-form-field>
+    <mat-form-field>
+        <input [(ngModel)]="registro.usuario" matInput placeholder="Usuario">
+    </mat-form-field>
+    <mat-form-field>
+        <input [(ngModel)]="registro.contrasenia" matInput placeholder="Contraseña">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="login()">Iniciar sesión</button>
+</div>

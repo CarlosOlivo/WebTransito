@@ -1,0 +1,72 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Reporte - #{{reporte.idReporte}}</mat-card-title>
+        <mat-card-subtitle>Fecha y hora del reporte - {{reporte.fechaHora == "Cargando" ? reporte.fechaHora : reporte.fechaHora | date:'dd/MM/yyyy HH:mm:ss a'}}
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <b>Lugar del reporte</b>
+        <ul>
+            <li>Latitud: {{reporte.latitud}}</li>
+            <li>Longitud: {{reporte.longitud}}</li>
+        </ul>
+        <b>Conductor afectado</b>
+        <ul>
+            <li>Nombre completo: {{conductor.nombre}} {{conductor.apellidoPaterno}} {{conductor.apellidoMaterno}}</li>
+            <li>Fecha de nacimiento: {{conductor.fechaNacimiento}}</li>
+            <li>Número de licencia: {{conductor.numLicencia}}</li>
+            <li>Número de celular: {{conductor.numCelular}}</li>
+        </ul>
+        <b>Vehiculo afectado</b>
+        <ul>
+            <li>Placas: {{reporte.placas}}</li>
+            <li>Marca: {{vehiculo.marca}}</li>
+            <li>Modelo: {{vehiculo.modelo}}</li>
+            <li>Año: {{vehiculo.anio}}</li>
+            <li>Color: {{vehiculo.color}}</li>
+            <li *ngIf="vehiculo.poliza != null">Poliza: {{vehiculo.poliza}}</li>
+            <li *ngIf="vehiculo.idAseguradora">Aseguradora: {{aseguradora.aseguradora}}</li>
+        </ul>
+        <b>Conductor implicado</b>
+        <ul>
+            <li>Nombre completo: {{implicado.nombre}}</li>
+            <li>Placas: {{implicado.placas}}</li>
+            <li>Marca: {{implicado.marca}}</li>
+            <li>Modelo: {{implicado.modelo}}</li>
+            <li>Color: {{implicado.color}}</li>
+            <li *ngIf="implicado.poliza != null">Poliza: {{implicado.poliza}}</li>
+            <li *ngIf="implicado.idAseguradora != null">Aseguradora: {{aseguradoraImplicado.aseguradora}}</li>
+        </ul>
+        <div *ngIf="reporte.idDictamen != null">
+            <b>Dictamen</b>
+            <ul>
+                <li>Folio: {{reporte.idDictamen}}</li>
+                <li>Estado: Dictaminado</li>
+                <li>Fecha y hora del dictamen: {{dictamen.fechaHora == "Cargando" ? dictamen.fechaHora : dictamen.fechaHora | date:'dd/MM/yyyy HH:mm:ss a'}}</li>
+                <li>Dictaminado por: {{personal.nombre}} [{{cargo.cargo}}]</li>
+                <li>Descripción: {{dictamen.descripcion}}</li>
+            </ul>
+        </div>
+        <div [hidden]="reporte.imgs == 0">
+            <b>Fotos</b>
+            <ul id="imgs"></ul>
+        </div>
+        <div class="container" *ngIf="reporte.idDictamen == null">
+            <b>Nuevo dictamen</b><br>
+            <mat-form-field hintLabel="Maximo 250 caracteres">
+                <textarea [(ngModel)]="descripcion" matInput #input maxlength="250" placeholder="Descripción"></textarea>
+                <mat-hint align="end">{{input.value?.length || 0}}/250</mat-hint>
+            </mat-form-field>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button (click)="newDictamen()" *ngIf="reporte.idDictamen == null">Guardar dictamen</button>
+        <button mat-raised-button (click)="verMapa()" target="_blank">Ver mapa</button>
+        <button mat-raised-button [routerLink]="['/reportes']">Regresar a reportes</button>
+    </mat-card-actions>
+</mat-card>
+<mat-card>
+    <mat-card-content>
+        <!-- <gallery id="imgs"></gallery> -->
+    </mat-card-content>
+</mat-card>

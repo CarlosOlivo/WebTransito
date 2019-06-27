@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row class="button-row" *ngIf="personal == null">
+        <span routerLink="/">{{title}}</span>
+        <span class="spacer"></span>
+        <a routerLink="/acceso" mat-flat-button color="primary">Inicio de sesión</a>
+        <a routerLink="/registro" mat-flat-button color="primary">Registro de personal</a>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="button-row" *ngIf="personal != null">
+        <span routerLink="/">{{title}}</span>
+        <a routerLink="/reportes" mat-flat-button color="primary">Reportes</a>
+        <a routerLink="/chat" mat-flat-button color="primary">Chat</a>
+        <span class="spacer"></span>
+        <span mat-flat-button>{{personal.usuario}}</span>
+        <a (click)="logout()" mat-flat-button color="primary">Cerrar sesión</a>
+    </mat-toolbar-row>
+</mat-toolbar>

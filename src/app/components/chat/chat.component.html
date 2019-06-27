@@ -1,0 +1,14 @@
+<div style="text-align:center">
+    <h1>
+        Chat
+    </h1>
+    <div class="chat-container">
+        <div class="chat">
+            <div class="mensaje"></div>
+        </div>
+    </div>
+    <div style="margin-top: 8px">
+        <input id="input" type="text" #input>
+        <button (click)="sendMessage(input.value)" style="margin-left: 8px">Enviar mensaje</button>
+    </div>
+</div>
